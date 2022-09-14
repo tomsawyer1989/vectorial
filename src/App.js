@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectLoggedin } from './reducers/loginSlice';
 import LoginPage from "./pages/LoginPage";
 import HomePage from './pages/HomePage';

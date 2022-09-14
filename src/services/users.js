@@ -9,11 +9,11 @@ export const fetchLogin = (body) => async (dispatch) => {
 
         dispatch(loginSuccess(response.json()));
         return response.json();
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log(error);
 
-        dispatch(loginError(err));
-        throw err;
+        dispatch(loginError('Server error'));
+        throw error;
     }
 }
 
@@ -21,9 +21,9 @@ export const fetchUsers = async (params) => {
     try {
         const response = await fetch(getUsers(params), optionsGET());
         return response.json();
-    } catch (err) {
-        console.log(err);
-        throw err;
+    } catch (error) {
+        console.log(error);
+        throw error;
     }
 }
 
@@ -31,9 +31,9 @@ export const fetchPostUser = async (body) => {
     try {
         const response = await fetch(postUser(), optionsPOST(body));
         return response.json();
-    } catch (err) {
-        console.log(err);
-        throw err;
+    } catch (error) {
+        console.log(error);
+        throw error;
     }
 }
 
@@ -41,8 +41,8 @@ export const fetchDeleteUser = async (body) => {
     try {
         const response = await fetch(deleteUser(), optionsDELETE(body));
         return response.json();
-    } catch (err) {
-        console.log(err);
-        throw err;
+    } catch (error) {
+        console.log(error);
+        throw error;
     }
 }

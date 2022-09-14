@@ -1,4 +1,4 @@
-const baseUrl = 'https://dummyapi.io/data/v1/';
+const baseUrl = 'http://example/';
 
 function serialize(obj) {
     const serialzedParams = Object.keys(obj)
