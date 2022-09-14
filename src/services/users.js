@@ -1,6 +1,6 @@
 import { optionsGET, optionsPOST, optionsDELETE } from './config/options';
 import { login, getUsers, postUser, deleteUser } from './config/endpoints';
-import { loginRequested, loginSuccess, loginError } from '../reducers/loginSlice';
+import { loginRequested, loginSuccess, loginError, logoutRequested, logoutSuccess } from '../reducers/loginSlice';
 
 export const fetchLogin = (body) => async (dispatch) => {
     dispatch(loginRequested());
@@ -15,6 +15,11 @@ export const fetchLogin = (body) => async (dispatch) => {
         dispatch(loginError('Server error'));
         throw error;
     }
+}
+
+export const fetchLogout = () => async (dispatch) => {
+    dispatch(logoutRequested());
+    dispatch(logoutSuccess());
 }
 
 export const fetchUsers = async (params) => {

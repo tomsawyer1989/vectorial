@@ -44,7 +44,7 @@ function LoginPage() {
         }
 
         setValidated(true);
-    };
+    }
 
     return (
         <Container style={styles.container}>

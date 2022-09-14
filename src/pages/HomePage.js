@@ -27,7 +27,7 @@ function HomePage() {
         }
 
         setValidated(true);
-    };
+    }
 
     const onCloseModal = () => {
         setName('');
@@ -73,7 +73,7 @@ function HomePage() {
             </Container>
             <Modal show={show} onHide={() => onCloseModal()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Añadir usuario</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form className='m-4' noValidate validated={validated} onSubmit={handleSubmit}>

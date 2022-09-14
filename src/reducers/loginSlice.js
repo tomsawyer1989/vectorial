@@ -26,12 +26,21 @@ export const loginSlice = createSlice({
             state.loggedin = false;
             state.user = null;
             state.error = action.payload;
+        },
+        logoutRequested: (state) => {
+            state.isLoading = true;
+            state.loggedin = true;
+        },
+        logoutSuccess: (state) => {
+            state.isLoading = false;
+            state.loggedin = false;
+            state.user = null;
         }
     },
 });
 
 export const selectLoggedin = (state) => state.login.loggedin;
 
-export const { loginRequested, loginSuccess, loginError } = loginSlice.actions;
+export const { loginRequested, loginSuccess, loginError, logoutRequested, logoutSuccess } = loginSlice.actions;
 
 export default loginSlice.reducer;
