@@ -30,6 +30,8 @@ export const loginSlice = createSlice({
     },
 });
 
-export const { increment, decrement, incrementByAmount } = loginSlice.actions;
+export const selectLoggedin = (state) => state.login.loggedin;
+
+export const { loginRequested, loginSuccess, loginError } = loginSlice.actions;
 
 export default loginSlice.reducer;
