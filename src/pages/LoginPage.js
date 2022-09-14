@@ -25,9 +25,7 @@ const styles = {
         display: 'flex',
         justifyContent: 'center',
         padding: '10px',
-        color: 'white',
-        borderRadius: '15px 15px 0px 0px',
-        backgroundColor: 'gray'
+        borderRadius: '15px 15px 0px 0px'
     }
 };
 
@@ -52,7 +50,7 @@ function LoginPage() {
         <Container style={styles.container}>
             <Row style={styles.loginContainer}>
                 <Col xs={12} md={{span: 4, offset: 4}} style={styles.loginForm}>
-                    <div style={styles.loginTitle}>
+                    <div className='text-white-50 bg-dark' style={styles.loginTitle}>
                         <PersonFill size={30} /><h4>Iniciar sesión</h4>
                     </div>
                     <Form className='m-4' noValidate validated={validated} onSubmit={handleSubmit}>
@@ -64,7 +62,7 @@ function LoginPage() {
                                 defaultValue={username}
                                 onChange={(event) => setUsername(event.target.value)}
                             />
-                            <Form.Control.Feedback className='m-0' type="invalid">Nombre de usuario requerido</Form.Control.Feedback>
+                            <Form.Control.Feedback className='m-0' type="invalid">Usuario es requerido</Form.Control.Feedback>
                         </Form.Group>
                         <Form.Group className='mt-4' controlId="validationPassword">
                             <Form.Control
@@ -74,9 +72,9 @@ function LoginPage() {
                                 defaultValue={password}
                                 onChange={(event) => setPassword(event.target.value)}
                             />
-                            <Form.Control.Feedback className='m-0' type="invalid">Contraseña requerida</Form.Control.Feedback>
+                            <Form.Control.Feedback className='m-0' type="invalid">Contraseña es requerida</Form.Control.Feedback>
                         </Form.Group>
-                        <Button className='mt-4' type="submit" style={{width: '100%'}}>Ingresar</Button>
+                        <Button className='mt-4 bg-dark' type="submit" style={{width: '100%'}}>Ingresar</Button>
                     </Form>
                 </Col>
             </Row>
