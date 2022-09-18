@@ -12,6 +12,6 @@ function serialize(obj) {
 }
 
 export const login = () => `${ baseUrl }test_users_login`;
-export const getUsers = (params) => `${ baseUrl }users${serialize(params)}`;
+export const getUsers = (params) => `${ baseUrl }users${params ? serialize(params) : ''}`;
 export const postUser = () => `${ baseUrl }users`;
 export const deleteUser = (id) => `${ baseUrl }users/${id}`;
