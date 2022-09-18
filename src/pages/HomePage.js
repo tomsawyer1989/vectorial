@@ -79,8 +79,8 @@ function HomePage() {
                 </div>
             </div>
             <div className="row mt-2 mb-5">
-                <div className="d-flex flex-column justify-content-between" style={{ height: '494px' }}>
-                    <table className="w-100 table-responsive">
+                <div className="d-flex flex-column justify-content-between p-3 border rounded" style={{ height: '512px' }}>
+                    <table className="table-responsive">
                         {users.length !== 0 ? <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -92,7 +92,9 @@ function HomePage() {
                         </thead>
                         :
                         <thead>
-                            <tr className='text-center'>No hay resultados...</tr>
+                            <tr className='text-center'>
+                                <th>No hay resultados...</th>
+                            </tr>
                         </thead>}
                         <tbody>
                             {users.map((item, index) => (
@@ -110,8 +112,8 @@ function HomePage() {
                             ))}
                         </tbody>
                     </table>
-                    <nav className='w-100' aria-label="Page navigation">
-                        <ul className="pagination justify-content-evenly align-items-center">
+                    <nav aria-label="Page navigation">
+                        <ul className="pagination m-0 justify-content-evenly align-items-center">
                             <li className="page-item">
                                 <button className="btn btn-light" type="button" onClick={() => onPrevPage()} aria-label="Previous">
                                     <span style={{ fontSize: '1.6em' }} aria-hidden="true">&laquo;</span>

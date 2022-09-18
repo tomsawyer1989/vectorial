@@ -22,7 +22,7 @@ function LoginPage() {
 
     return (
         <div className='container vh-100 d-flex justify-content-center align-items-center'>
-            <div>
+            <div className='p-4 border rounded'>
                 <div className='d-flex align-items-center mb-4'>
                     <h4>Iniciar sesión</h4>
                 </div>
