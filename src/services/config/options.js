@@ -1,25 +1,25 @@
-const headers = jwt => {
-    const session = JSON.parse(localStorage.getItem('session'));
-    return {
+const headers = () => {
+    const token = JSON.parse(localStorage.getItem('token'));
+
+    return token ? {
         'Content-Type': 'application/json',
-        Authorization: jwt ? `Bearer ${session.jwt}` : null,
-        // 'app-id': `${ process.env.REACT_APP_DUMMY_API }`
+        Authorization: `Bearer ${token}`
     }
+    : { 'Content-Type': 'application/json' }
 }
 
-export const optionsGET = (jwt = false) => ({
+export const optionsGET = () => ({
     method: 'GET',
-    headers: headers(jwt),
+    headers: headers(),
 });
 
-export const optionsPOST = (body, jwt = false) => ({
+export const optionsPOST = (body) => ({
     method: 'POST',
-    headers: headers(jwt),
+    headers: headers(),
     body: JSON.stringify(body),
 });
 
-export const optionsDELETE = (body, jwt = false) => ({
+export const optionsDELETE = () => ({
     method: 'DELETE',
-    headers: headers(jwt),
-    body: JSON.stringify(body),
+    headers: headers()
 });

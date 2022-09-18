@@ -8,10 +8,11 @@ export const fetchLogin = (body) => async (dispatch) => {
         const response = await fetch(login(), optionsPOST(body));
 
         if (response.ok) {
-            const data = await response.json();
-            
-            dispatch(loginSuccess(data));
-            return data;
+            const token = await response.json();
+            localStorage.setItem('token', JSON.stringify(token));
+
+            dispatch(loginSuccess(token));
+            return token;
         }
     } catch (error) {
         console.log(error);
@@ -23,6 +24,7 @@ export const fetchLogin = (body) => async (dispatch) => {
 
 export const fetchLogout = () => async (dispatch) => {
     dispatch(logoutRequested());
+    localStorage.clear();
     dispatch(logoutSuccess());
 }
 
@@ -46,9 +48,9 @@ export const fetchPostUser = async (body) => {
     }
 }
 
-export const fetchDeleteUser = async (body) => {
+export const fetchDeleteUser = async (id) => {
     try {
-        const response = await fetch(deleteUser(), optionsDELETE(body));
+        const response = await fetch(deleteUser(id), optionsDELETE());
         return response.json();
     } catch (error) {
         console.log(error);

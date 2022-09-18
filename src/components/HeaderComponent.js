@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { selectLoggedin, selectUser } from '../reducers/loginSlice';
+import { selectLoggedin } from '../reducers/loginSlice';
 import { fetchLogout } from '../services/users';
 
 function HeaderComponent() {
     const [isNavCollapsed, setIsNavCollapsed] = useState(true);
     const loggedin = useSelector(selectLoggedin);
-    const user = useSelector(selectUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
