@@ -3,7 +3,7 @@ const headers = () => {
 
     return token ? {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token.access_token}`
     }
     : { 'Content-Type': 'application/json' }
 }

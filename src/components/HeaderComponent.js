@@ -31,7 +31,7 @@ function HeaderComponent() {
                     {<ul className="navbar-nav">
                         <li className="nav-item d-flex">
                             <div className="d-flex flex-column justify-content-center">
-                                <strong>Jorge Herrera</strong>
+                                <strong>admin</strong>
                                 <small className="text-secondary">Administrador</small>
                             </div>
                         </li>
