@@ -29,15 +29,15 @@ function HeaderComponent() {
                 </button>
                 <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse justify-content-end`} id="navbarNav">
                     {<ul className="navbar-nav">
-                        <li className="nav-item d-flex">
+                        <li className="nav-item d-flex me-4">
                             <div className="d-flex flex-column justify-content-center">
                                 <strong>admin</strong>
                                 <small className="text-secondary">Administrador</small>
                             </div>
                         </li>
                         <li className="nav-item">
-                            <button className="btn btn-light" type="button" onClick={() => onLogout()} aria-label="Header logout">
-                                <i className="bi bi-box-arrow-left" style={{ fontSize: '2em' }}></i>
+                            <button className="btn btn-light d-flex p-0 align-items-center" type="button" onClick={() => onLogout()} aria-label="Header logout">
+                                <i className="bi bi-box-arrow-left me-2" style={{ fontSize: '2em' }}></i><strong>Salir</strong>
                             </button>
                         </li>
                     </ul>}
