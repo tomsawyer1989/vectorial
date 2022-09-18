@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { selectLoggedin } from '../reducers/loginSlice';
 import { fetchLogin } from '../services/users';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const loggedin = useSelector(selectLoggedin);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        loggedin && navigate('/home');
+    }, [loggedin]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // dispatch(fetchLogin({ username, password }));
+        dispatch(fetchLogin({ username, password }));
     }
 
     return (
         <div className='container vh-100 d-flex justify-content-center align-items-center'>
             <div>
-                <div className='d-flex align-items-center'>
-                    <i className="bi bi-person-fill" style={{ fontSize: '2em' }}></i><h4>Iniciar sesión</h4>
+                <div className='d-flex align-items-center mb-4'>
+                    <h4>Iniciar sesión</h4>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">

@@ -1,4 +1,4 @@
-const baseUrl = 'http://example/';
+const baseUrl = 'http://localhost:8000/';
 
 function serialize(obj) {
     const serialzedParams = Object.keys(obj)

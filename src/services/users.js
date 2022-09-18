@@ -7,8 +7,12 @@ export const fetchLogin = (body) => async (dispatch) => {
     try {
         const response = await fetch(login(), optionsPOST(body));
 
-        dispatch(loginSuccess(response.json()));
-        return response.json();
+        if (response.ok) {
+            const data = await response.json();
+            
+            dispatch(loginSuccess(data));
+            return data;
+        }
     } catch (error) {
         console.log(error);
 
