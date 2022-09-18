@@ -78,10 +78,10 @@ function HomePage() {
                     </button>
                 </div>
             </div>
-            <div className="row mt-2">
-                <div className="col-12">
+            <div className="row mt-2 mb-5">
+                <div className="d-flex flex-column justify-content-between" style={{ height: '494px' }}>
                     <table className="w-100 table-responsive">
-                        <thead>
+                        {users.length !== 0 ? <thead>
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
@@ -90,6 +90,10 @@ function HomePage() {
                                 <th>Acción</th>
                             </tr>
                         </thead>
+                        :
+                        <thead>
+                            <p className='text-center'>No hay resultados...</p>
+                        </thead>}
                         <tbody>
                             {users.map((item, index) => (
                                 <tr key={index}>
@@ -107,12 +111,13 @@ function HomePage() {
                         </tbody>
                     </table>
                     <nav className='w-100' aria-label="Page navigation">
-                        <ul className="pagination justify-content-evenly">
+                        <ul className="pagination justify-content-evenly align-items-center">
                             <li className="page-item">
                                 <button className="btn btn-light" type="button" onClick={() => onPrevPage()} aria-label="Previous">
                                     <span style={{ fontSize: '1.6em' }} aria-hidden="true">&laquo;</span>
                                 </button>
                             </li>
+                            <li className="page-item">Página {currentPage}</li>
                             <li className="page-item">
                                 <button className="btn btn-light" type="button" onClick={() => onNextPage()} aria-label="Next">
                                     <span style={{ fontSize: '1.6em' }} aria-hidden="true">&raquo;</span>
