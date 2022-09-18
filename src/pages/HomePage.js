@@ -92,7 +92,7 @@ function HomePage() {
                         </thead>
                         :
                         <thead>
-                            <p className='text-center'>No hay resultados...</p>
+                            <tr className='text-center'>No hay resultados...</tr>
                         </thead>}
                         <tbody>
                             {users.map((item, index) => (
