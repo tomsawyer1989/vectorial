@@ -1,12 +1,4 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import Row from 'react-bootstrap/Row';
-import Table from 'react-bootstrap/Table';
-import { PlusLg, Trash3 } from 'react-bootstrap-icons';
 import DefaultLayout from '../components/DefaultLayout';
 import { fetchUsers, fetchPostUser } from '../services/users';
 
@@ -16,17 +8,10 @@ function HomePage() {
     const [lastname, setLastname] = useState('');
     const [company, setCompany] = useState('');
     const [email, setEmail] = useState('');
-    const [validated, setValidated] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const form = event.currentTarget;
-
-        if (form.checkValidity() !== false) {
-            fetchPostUser({ name, lastname, company, email });
-        }
-
-        setValidated(true);
+        onCloseModal();
     }
 
     const onCloseModal = () => {
@@ -34,93 +19,78 @@ function HomePage() {
         setLastname('');
         setCompany('');
         setEmail('');
-        setValidated(false);
         setShow(false);
     }
 
     return (
         <DefaultLayout>
-            <Container>
-                <Row className='mt-5'>
-                    <Col>
-                        <Button className='p-1 bg-dark' onClick={() => setShow(true)}><PlusLg size={18}/> Añadir usuario</Button>
-                    </Col>
-                </Row>
-                <Row className='mt-2'>
-                    <Col>
-                        <Table responsive>
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Empresa</th>
-                                    <th>Email</th>
-                                    <th>Acción</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>Imexhs</td>
-                                    <td>@hotmail</td>
-                                    <td><Button className='p-1 bg-dark'><Trash3 size={18} /></Button></td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Col>
-                </Row>
-            </Container>
-            <Modal show={show} onHide={() => onCloseModal()}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Añadir usuario</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form className='m-4' noValidate validated={validated} onSubmit={handleSubmit}>
-                        <Form.Group className='mt-3' controlId="validationName">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder="Nombre"
-                                defaultValue={name}
-                                onChange={(event) => setName(event.target.value)}
-                            />
-                            <Form.Control.Feedback className='m-0' type="invalid">Nombre es requerido</Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group className='mt-4' controlId="validationLastname">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder="Apellido"
-                                defaultValue={lastname}
-                                onChange={(event) => setLastname(event.target.value)}
-                            />
-                            <Form.Control.Feedback className='m-0' type="invalid">Apellido es requerido</Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group className='mt-3' controlId="validationCompany">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder="Empresa"
-                                defaultValue={company}
-                                onChange={(event) => setCompany(event.target.value)}
-                            />
-                            <Form.Control.Feedback className='m-0' type="invalid">Empresa es requerida</Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group className='mt-3' controlId="validationEmail">
-                            <Form.Control
-                                required
-                                type="text"
-                                placeholder="Email"
-                                defaultValue={email}
-                                onChange={(event) => setEmail(event.target.value)}
-                            />
-                            <Form.Control.Feedback className='m-0' type="invalid">Email es requerido</Form.Control.Feedback>
-                        </Form.Group>
-                        <Button className='mt-4 bg-dark' type="submit" style={{width: '100%'}}>Ingresar</Button>
-                    </Form>
-                </Modal.Body>
-            </Modal>
+            <div className="row">
+                <div className="col">
+                    <button className="btn btn-light" type="button" onClick={() => setShow(true)}>
+                        <i className="bi bi-plus-lg" style={{ fontSize: '1em' }}></i>
+                        Añadir usuario
+                    </button>
+                </div>
+            </div>
+            <div className="row mt-2">
+                <div className="col">
+                    <table className="w-100 table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Empresa</th>
+                                <th>Email</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>Imexhs</td>
+                                <td>@hotmail</td>
+                                <td>
+                                    <button className="btn btn-light" type="button" onClick={() => { }} aria-label="Table delete">
+                                        <i className="bi bi-trash" style={{ fontSize: '1em' }}></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div className={`modal ${show ? 'd-block' : 'd-none'}`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} tabIndex="-1">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Añadir usuario</h5>
+                            <button type="button" className="btn-close" onClick={() => onCloseModal()} aria-label="Modal close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <form onSubmit={handleSubmit}>
+                                <div className="mb-3">
+                                    <label className="form-label">Nombre</label>
+                                    <input type="name" className="form-control" value={name} onChange={(event) => setName(event.target.value)} aria-label="Input name" />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Apellido</label>
+                                    <input type="lastname" className="form-control" value={lastname} onChange={(event) => setLastname(event.target.value)} aria-label="Input lastname" />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Empresa</label>
+                                    <input type="company" className="form-control" value={company} onChange={(event) => setCompany(event.target.value)} aria-label="Input company" />
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Email</label>
+                                    <input type="email" className="form-control" value={email} onChange={(event) => setEmail(event.target.value)} aria-label="Input email" />
+                                </div>
+                                <button type="submit" className="btn btn-light">Aceptar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </DefaultLayout>
     );
 }

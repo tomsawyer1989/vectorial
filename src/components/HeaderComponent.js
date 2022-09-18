@@ -1,13 +1,12 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import { BoxArrowLeft } from 'react-bootstrap-icons';
+import { selectUser } from '../reducers/loginSlice';
 import { fetchLogout } from '../services/users';
 
 function HeaderComponent() {
+    const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+    const user = useSelector(selectUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -17,17 +16,31 @@ function HeaderComponent() {
     }
 
     return (
-        <Navbar bg="dark" variant="dark">
-            <Container fluid>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>
-                        Signed in as: Mark Otto
-                    </Navbar.Text>
-                    <Button variant="dark" onClick={() => onLogout()}><BoxArrowLeft size={25}/> Salir</Button>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <nav className="navbar navbar-expand-md bg-light">
+            <div className="container-fluid">
+                <a className="navbar-brand" href="https://www.vectorial.co/" target="_blank">
+                    <img width={200} height={40} src={require('../assets/images/vectorial.png')} alt="vectorial" />
+                </a>
+                <button className="navbar-toggler" type="button" onClick={() => setIsNavCollapsed(!isNavCollapsed)} aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse justify-content-end`} id="navbarNav">
+                    {<ul className="navbar-nav">
+                        <li className="nav-item d-flex">
+                            <div className="d-flex flex-column justify-content-center">
+                                <strong>Jorge Herrera</strong>
+                                <small className="text-secondary">Administrador</small>
+                            </div>
+                        </li>
+                        <li className="nav-item">
+                            <button className="btn btn-light" type="button" onClick={() => onLogout()} aria-label="Header logout">
+                                <i className="bi bi-box-arrow-left" style={{ fontSize: '2em' }}></i>
+                            </button>
+                        </li>
+                    </ul>}
+                </div>
+            </div>
+        </nav>
     );
 }
 

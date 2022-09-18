@@ -40,6 +40,7 @@ export const loginSlice = createSlice({
 });
 
 export const selectLoggedin = (state) => state.login.loggedin;
+export const selectUser = (state) => state.login.user;
 
 export const { loginRequested, loginSuccess, loginError, logoutRequested, logoutSuccess } = loginSlice.actions;
 
