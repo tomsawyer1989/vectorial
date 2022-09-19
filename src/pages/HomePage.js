@@ -68,7 +68,7 @@ function HomePage() {
                 </div>
             </div>
             <div className="row mt-2 mb-5">
-                <div className="d-flex flex-column justify-content-between p-3 border rounded" style={{ height: '512px' }}>
+                <div className="d-flex flex-column justify-content-between p-2 border rounded" style={{ height: '512px' }}>
                     <TableComponent users={users} onDelete={onDelete} />
                     <PaginatorComponent onPrevPage={onPrevPage} currentPage={currentPage} onNextPage={onNextPage} />
                 </div>

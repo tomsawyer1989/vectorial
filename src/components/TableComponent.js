@@ -2,7 +2,7 @@ import React from "react";
 
 function TableComponent({ users, onDelete }) {
     return (
-        <table className="table-responsive">
+        <table className="table">
             {users.length !== 0 ? <thead>
                 <tr>
                     <th>Nombre</th>
