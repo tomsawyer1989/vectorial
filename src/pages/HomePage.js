@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import DefaultLayout from '../components/DefaultLayout';
+import UserForm from '../components/forms/UserForm';
+import ModalComponent from '../components/ModalComponent';
+import PaginatorComponent from '../components/PaginatorComponent';
+import TableComponent from '../components/TableComponent';
 import { fetchUsers, fetchPostUser, fetchDeleteUser } from '../services/users';
 
 function HomePage() {
     const [show, setShow] = useState(false);
-    const [name, setName] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [company, setCompany] = useState('');
-    const [email, setEmail] = useState('');
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -48,22 +48,11 @@ function HomePage() {
     }
 
     const onCloseModal = () => {
-        setName('');
-        setLastname('');
-        setCompany('');
-        setEmail('');
         setShow(false);
     }
 
-    const handleSubmit = async () => {
-        const body = {
-            name,
-            lastname,
-            company,
-            email
-        };
-
-        await fetchPostUser(body);
+    const handleSubmit = async (user) => {
+        await fetchPostUser(user);
         getUsers(currentPage);
         onCloseModal();
     }
@@ -80,88 +69,13 @@ function HomePage() {
             </div>
             <div className="row mt-2 mb-5">
                 <div className="d-flex flex-column justify-content-between p-3 border rounded" style={{ height: '512px' }}>
-                    <table className="table-responsive">
-                        {users.length !== 0 ? <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Empresa</th>
-                                <th>Email</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        :
-                        <thead>
-                            <tr className='text-center'>
-                                <th>No hay resultados...</th>
-                            </tr>
-                        </thead>}
-                        <tbody>
-                            {users.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.name}</td>
-                                    <td>{item.lastname}</td>
-                                    <td>{item.company}</td>
-                                    <td>{item.email}</td>
-                                    <td>
-                                        <button className="btn btn-light" type="button" onClick={() => onDelete(item.id)} aria-label="Table delete">
-                                            <i className="bi bi-trash" style={{ fontSize: '1em' }}></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    <nav aria-label="Page navigation">
-                        <ul className="pagination m-0 justify-content-evenly align-items-center">
-                            <li className="page-item">
-                                <button className="btn btn-light" type="button" onClick={() => onPrevPage()} aria-label="Previous">
-                                    <span style={{ fontSize: '1.6em' }} aria-hidden="true">&laquo;</span>
-                                </button>
-                            </li>
-                            <li className="page-item">Página {currentPage}</li>
-                            <li className="page-item">
-                                <button className="btn btn-light" type="button" onClick={() => onNextPage()} aria-label="Next">
-                                    <span style={{ fontSize: '1.6em' }} aria-hidden="true">&raquo;</span>
-                                </button>
-                            </li>
-                        </ul>
-                    </nav>
+                    <TableComponent users={users} onDelete={onDelete} />
+                    <PaginatorComponent onPrevPage={onPrevPage} currentPage={currentPage} onNextPage={onNextPage} />
                 </div>
             </div>
-            <div className={`modal ${show ? 'd-block' : 'd-none'}`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} tabIndex="-1">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title">Añadir usuario</h5>
-                            <button type="button" className="btn-close" onClick={() => onCloseModal()} aria-label="Modal close"></button>
-                        </div>
-                        <div className="modal-body">
-                            <form>
-                                <div className="mb-3">
-                                    <label className="form-label">Nombre</label>
-                                    <input type="name" className="form-control" value={name} onChange={(event) => setName(event.target.value)} aria-label="Input name" />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Apellido</label>
-                                    <input type="lastname" className="form-control" value={lastname} onChange={(event) => setLastname(event.target.value)} aria-label="Input lastname" />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Empresa</label>
-                                    <input type="company" className="form-control" value={company} onChange={(event) => setCompany(event.target.value)} aria-label="Input company" />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Email</label>
-                                    <input type="email" className="form-control" value={email} onChange={(event) => setEmail(event.target.value)} aria-label="Input email" />
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button className="btn btn-light" type="button" onClick={() => handleSubmit()}>Aceptar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {show && <ModalComponent title="Añadir usuario" onCloseModal={onCloseModal}>
+                <UserForm handleSubmit={handleSubmit} />
+            </ModalComponent>}
         </DefaultLayout>
     );
 }
