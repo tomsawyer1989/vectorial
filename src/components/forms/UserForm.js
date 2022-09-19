@@ -25,7 +25,7 @@ function UserForm({ handleSubmit }) {
                 <input type="email" className="form-control" value={email} onChange={(event) => setEmail(event.target.value)} aria-label="Input email" />
             </div>
             <div className="mt-4">
-                <button className="form-control btn btn-light" type="button" onClick={() => handleSubmit({ name, lastname, company, email })}>Aceptar</button>
+                <button className="form-control btn btn-primary" type="button" onClick={() => handleSubmit({ name, lastname, company, email })}>Aceptar</button>
             </div>
         </form>
     );
