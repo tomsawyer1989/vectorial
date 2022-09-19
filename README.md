@@ -38,3 +38,10 @@ Se pueden consumir los endpoints (/test_users_login y /users) en el http://local
 Navegar a http://localhost:3000/
 
 Nota: Recuerde primero ejecutar la Fake-Api y luego el Front-End para que éste pueda conectarse e interactuar con la información.
+
+El login se debe realizar con las siguientes credenciales:
+
+{
+  "username": "admin",
+  "password":"admin"
+}
